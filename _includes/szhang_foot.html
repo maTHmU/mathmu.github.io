@@ -1,0 +1,19 @@
+			<section id="disqus_thread"></section>
+			<footer>
+                <p><small>{{ site.copyright }}</small></p>
+            </footer>
+        </div>
+        <script src="/static/minimal/javascripts/scale.fix.js"></script>
+	{% if page.disqus or page.permalink == Nil or page.cover %}
+		<script type="text/javascript">
+			var disqus_shortname = 'mathmu';
+			(function() {
+				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    {% endif %}
+    </body>
+</html>

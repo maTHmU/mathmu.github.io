@@ -1,0 +1,3 @@
+[submodule "static/spring"]
+	path = static/spring
+	url = https://github.com/maTHmU/spring.git

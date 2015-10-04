@@ -1,0 +1,18 @@
+title: <img src="/static/images/mathmu.png" width="100px"/>
+tagline: Computer Algebra System
+owner: maTHmU
+link: http://mathmu.github.io
+copyright: '&copy;&nbsp;<a href="http://szhang.net/Contact">Jason Siang ZHANG</a>'
+
+highlighter: pygments
+permalink: pretty
+#markdown: maruku
+markdown: kramdown
+kramdown:
+    input: GFM
+#markdown: redcarpet
+#redcarpet:
+#    extensions: ["smart", "tables", "no_intra_emphasis", "fenced_code_blocks", "autolink", "highlight", "quote", "footnotes", "strikethrough", "with_toc_data"]
+
+exclude: [README.md]
+

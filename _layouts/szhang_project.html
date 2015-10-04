@@ -1,0 +1,16 @@
+{% include szhang_header.html %}
+
+<section>
+    <h1>{{ page.title }}</h1>
+    <h6>From {{ page.date | date: "%B, %Y" }}</h6>
+    {% if page.introduction %}
+        <p> {{page.introduction }}
+    {% endif %}
+    {% if page.cover %}
+        <a href="{{ page.url }}"><img src="{{ page.cover }}"></a>
+    {% endif %}
+    {{ content }}
+</section>
+ 
+{% include szhang_foot.html %}
+

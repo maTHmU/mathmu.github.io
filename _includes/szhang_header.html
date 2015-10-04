@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>maTHmU - {{ page.title }}</title>
+        <link rel="stylesheet" href="/stylesheets/styles.css">
+        <!--link rel="stylesheet" href="/stylesheets/github-light.css"-->
+        <link rel="stylesheet" href="/stylesheets/github-markdown.css">
+        <link rel="stylesheet" href="/static/minimal/stylesheets/pygment_trac.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        {% if page.mathjax %}
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+            TeX: {
+              equationNumbers: {
+                autoNumber: "AMS"
+              }
+            },
+            tex2jax: {
+              inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+              displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
+              processEscapes: true
+            }
+          });
+        </script>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        {% endif %}
+        <!--[if lt IE 9]>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="wrapper">
+            <header>
+                <h1><a href="/">{{ site.title }}</a></h1>
+                <div class="nav" id="sidebar">
+{% capture sidebar %}{% include sidebar.md %}{% endcapture %}
+{{ sidebar | markdownify }}
+                </div>
+                <script type="text/javascript">
+                    var path = window.location.href;
+                    path = path.replace(/\/$/,"");
+                    path = decodeURIComponent(path);
+                    var sidebar = document.getElementById('sidebar');
+                    var objs = sidebar.getElementsByTagName('a');
+                    for (i in objs) {
+                        var obj = objs[i];
+                        var href = obj.href;
+                        if (typeof(href) == 'string' && path.substring(0,href.length) == href)
+                            obj.className = 'active';
+                    }
+                </script>
+            </header>

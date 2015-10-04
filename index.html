@@ -1,0 +1,165 @@
+---
+layout: szhang_default 
+title: Welcome!
+---
+
+<style>
+.custom-nav {
+	z-index: 70;
+	position: fixed;
+	float: right;
+	padding: 0;
+    margin: 0;
+    top: 10px;
+	right: 10px;
+    font-family: Arial;
+	font-size: 16px;
+	line-height: 18px;
+	}
+	.custom-nav ul {
+		margin: 0px;
+	}
+	.custom-nav ul li {
+		display: table-cell;
+	}
+	.custom-nav ul li a {
+		display: block;
+		margin-left: 5px;
+		padding: 1px 6px;
+    }
+</style>
+
+<div class="custom-nav">
+<ul class="nav">
+    <li><a href="#Home">Home</a></li>
+    <li><a href="#About">About</a></li>
+</ul>
+</div>
+
+<section id="Home"></section>
+
+<h1>Home&nbsp;<small>{{ site.tagline }}</small><a target="_blank" title="write an email to me" href="mailto:mathmu@gmail.com?subject=Hi%20,{{ site.owner }}!" style="float:right"><img src="/static/images/gmail.gif"></a><a target="_blank" title="visit my github repository" href="https://github.com/maTHmU" style="float:right;margin:5px;"><img src="/static/images/github.png"></a></h1>
+
+<div class="center">
+<video title="software demo" poster="/projects/mathmu/demo.jpg" controls autoplay loop width="75%">
+<source src="/projects/mathmu/demo.mp4" type="video/mp4" loop="true" />
+<source src="/projects/mathmu/demo.webm" type="video/webm" loop="true" />
+</video><hr/>
+</div>
+
+{% for post in site.posts %}
+    {% if post.category == 'publications' %}
+        {% if post.pdf %}
+<a href="{{ post.pdf }}">
+    <img src="/static/images/pdf32.png" align="right">
+</a>
+        {% endif %}
+<span class="index_date"> {{ post.date | date: "%B, %Y" }}</span>&nbsp;-&nbsp;<a href="{{ post.url }}">{{ post.title }}</a>
+<br/>
+{% if post.introduction %}
+{{ post.introduction }}
+{% endif %}
+{% if post.cover %}
+<div class="center">
+<a href="{{ post.url }}"><img src="{{ post.cover }}" width="75%"></a>
+</div>
+{% endif %}
+<p align="right"><a href="{{ post.link }}" target="_blank"><em>{{ post.journal }}</em>, {{ post.volume }}</a></p><hr/>
+    {% endif %}
+{% endfor %}
+
+{% for post in site.posts %}
+{% if post.category == 'groups' %}
+<span class="index_date"> {{ post.date | date: "%B, %Y" }}</span>&nbsp;-&nbsp;<a href="{{ post.url }}">{{ post.title }}</a>
+{% if post.cover %}
+<div class="center">
+<a href="{{ post.url }}"><img src="{{ post.cover }}" width="75%"></a>
+</div>
+{% endif %}
+<hr/>
+{% endif %}
+{% endfor %}
+
+{% for post in site.posts %}
+{% if post.category == 'projects' %}
+<span class="index_date"> {{ post.date | date: "%B, %Y" }}</span>&nbsp;-&nbsp;<a href="{{ post.url }}">{{ post.title }}</a>
+{% if post.cover %}
+<div class="center">
+<a href="{{ post.url }}"><img src="{{ post.cover }}" width="75%"></a>
+</div>
+{% endif %}
+<hr/>
+{% endif %}
+{% endfor %}
+
+<section id="About"></section>
+
+<h2><a href="/awards">Outstanding Awards</a></h2>
+
+<table border="0">
+    <tbody>
+        <tr>
+            <td valign="top" width="8%" align="left"><span class="year">2010</span></td>
+            <td><span class="honor"><a href="http://news.tsinghua.edu.cn/publish/news/4205/2011/20110225232541875190560/20110225232541875190560_.html" target="_blank"><span>The Grand Prize</span></a><span> of The 7th &quot;Challenge Cup&quot; National Contest of College Students' Business Plan</span><u><br />
+            </u></span></td>
+        </tr>    
+        <tr>
+            <td valign="top" width="8%" align="left"><span class="year">2009</span></td>
+            <td><span class="honor"><a href="http://news.tsinghua.edu.cn/publish/news/4205/2011/20110225232353546846979/20110225232353546846979_.html" target="_blank"><span>The Grand Prize</span></a><span> of The 11th &quot;Challenge Cup&quot; National Contest of College Students' Scientific and Technological work</span><u><br />
+            </u></span></td>
+        </tr>
+    </tbody>
+</table>
+
+<h2><a href="/blog">Blog Updates</a></h2>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+<!--link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" crossorigin="anonymous"></script-->
+<!--section class="github-widget" data-repo="maTHmU/mathmu.github.io"></section>
+<script src="/javascripts/jquery.githubRepoWidget.js"></script-->
+<section class="github-box-content" style="margin-bottom:30px"><ul></ul></section>
+<script type="text/javascript">
+var repo_name = 'maTHmU/mathmu.github.io';
+var html_encode = function (str) {
+    if (!str || str.length == 0) return "";
+    return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+};
+
+$.ajax({
+    url: 'https://api.github.com/repos/' + repo_name,
+    dataType: 'jsonp',
+
+    success: function (results) {
+        var repo = results.data;
+        console.log(results);
+        //var pushed_at = repo.pushed_at.substr(0, 10);
+        var url_regex = /((http|https):\/\/)*[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/
+        if (repo.homepage && (m = repo.homepage.match(url_regex))) {
+            if (m[0] && !m[1]) repo.homepage = 'http://' + m[0];
+        }
+        else {
+            repo.homepage = '';
+        }
+        $.ajax({
+            url: 'https://api.github.com/repos/' + repo_name + "/issues?state=open&per_page=5&page=1&sort=updated",
+            dataType: 'jsonp',
+            success: function (results) {
+                var issues = results.data;
+                var $issues_table = $(".github-box-content ul");
+                //$issues_table.append('<tr><td colspan="2"><a href="' + repo.html_url + '/issues" target="_blank"><strong>Issues</strong></a></td></tr>');
+                for (var i = 0; i < issues.length; i++) {
+                    //var updated_at = issues[i].updated_at.substr(0, 10);
+                    var updated_at = new Date(issues[i].updated_at);
+                    $issues_table.append('<li><a href="' + issues[i].html_url + '" target="_blank">#' + issues[i].number + '</a>&nbsp;-&nbsp;<a href="' + issues[i].html_url.replace('https://github.com/' + repo_name + '/', '/Blog/#') + '">' + html_encode(issues[i].title) + '</a>&nbsp;by&nbsp;<a href="' + issues[i].user.url.replace('api.', '').replace('users/', '')
+                        + '" target="_blank">' + issues[i].user.login
+                        + '</a>&nbsp;at&nbsp;<span>'
+                        //+ updated_at
+                        + updated_at.toLocaleDateString() + '&nbsp;' + updated_at.toLocaleTimeString()
+                        + '</span></li>');
+                }
+            }
+        });
+    }
+});
+</script>
