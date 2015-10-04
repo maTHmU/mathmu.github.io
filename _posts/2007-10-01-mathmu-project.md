@@ -3,7 +3,7 @@ layout: szhang_project
 title: maTHμ Project
 category: projects
 permalink: /projects/mathmu
-cover: /projects/mathmu/logo.jpg
+cover: /projects/mathmu/mathmu.png
 ---
 
 <hr/><video title="software demo" poster="demo.jpg" controls autoplay loop width="100%">
