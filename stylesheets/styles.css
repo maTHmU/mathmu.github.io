@@ -224,6 +224,18 @@ section {
   /*padding-bottom:50px;*/
 }
 
+.scroll-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 50px;
+    cursor: pointer;
+    opacity: .4;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
+    z-index: 199;
+}
+
 small {
   font-size:11px;
 }

@@ -6,72 +6,72 @@ permalink: /projects/mathmu
 cover: /projects/mathmu/mathmu.png
 ---
 
-<hr/><video title="software demo" poster="demo.jpg" controls autoplay loop width="100%">
+<hr/><video title="software demo" poster="demo.jpg" controls autoplay loop width="75%">
 <source src="demo.mp4" type="video/mp4" loop="true" />
 <source src="demo.webm" type="video/webm" loop="true" />
 </video><hr/>
 
-![](plan_outline.png)
+![](plan_outline.png){:width="75%"}
 *Plan outline*
 
-[![](/publications/mathematical-theory-of-computer-algebra-system/cover.png)](/publications/mathematical-theory-of-computer-algebra-system)
+[![](/publications/mathematical-theory-of-computer-algebra-system/cover.png){:width="75%"}](/publications/mathematical-theory-of-computer-algebra-system)
 *Theory document*[^1]
 
-![](system.png)
+![](system.png){:width="75%"}
 *System design*[^2]
 
-![](ui.png)
+![](ui.png){:width="75%"}
 *Software UI*
 
-![](web.png)
+![](web.png){:width="75%"}
 *Web calculator*[^3]
 
-![](repo.png)
+![](repo.png){:width="75%"}
 *Code repo*[^4]
 
-![](factor_integer.png)
+![](factor_integer.png){:width="75%"}
 *Big integer factorization*
 
-![](math_constant.png)
+![](math_constant.png){:width="75%"}
 *Arbitrary precision math constants*
 
-![](factor_polynomial.png)
+![](factor_polynomial.png){:width="75%"}
 *Polynomial factorization*
 
-![](sum_product.png)
+![](sum_product.png){:width="75%"}
 *Symbolic summation and product*
 
-![](symbolic_differential.png)
+![](symbolic_differential.png){:width="75%"}
 *Symbolic differential*
 
-![](symbolic_integration.png)
+![](symbolic_integration.png){:width="75%"}
 *Symbolic integration*
 
-![](multi_integral.png)
+![](multi_integral.png){:width="75%"}
 *Multi variables integral*
 
-![](filled_curve.png)
+![](filled_curve.png){:width="75%"}
 *2D filled curve*
 
-![](polar_plot.png)
+![](polar_plot.png){:width="75%"}
 *Polar plot*
 
-![](3d_plot.png)
+![](3d_plot.png){:width="75%"}
 *3D plot*
 
-![](functional_programming.png)
+![](functional_programming.png){:width="75%"}
 *Rule-based pattern match & functional programming*
 
-![](general_computation.png)
+![](general_computation.png){:width="75%"}
 *General computation*
 
-![](plan.png)
+![](plan.png){:width="75%"}
 *Full plan*
 
-![](association.jpg)
+![](association.jpg){:width="75%"}
 *maTHμ Association*[^5]
 
-![](happy.jpg)
+![](happy.jpg){:width="75%"}
 *Happy:)*[^6]
 
 [^1]: [Mathematical Theory of Computer Algebra System](/publications/mathematical-theory-of-computer-algebra-system)
