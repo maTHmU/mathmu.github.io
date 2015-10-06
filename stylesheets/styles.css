@@ -105,7 +105,7 @@ img + em {
 }
 
 .wrapper {
-  width:860px;
+  width:930px;
   margin:0 auto;
 }
 
@@ -219,7 +219,7 @@ header ul a strong {
 }
 
 section {
-  width:680px;
+  width:750px;
   float:right;
   /*padding-bottom:50px;*/
 }
