@@ -2,7 +2,7 @@
 layout: szhang_group
 title: maTHμ Computer Algebra System Group
 category: groups
-permalink: /groups/mathmu-computer-algebra-system
+permalink: /groups/mathmu-computer-algebra-system/
 link: http://github.com/mulab
 cover: /groups/mathmu-computer-algebra-system/mathmu_cas_group.jpg
 ---

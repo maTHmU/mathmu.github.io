@@ -4,7 +4,7 @@ owner: maTHmU
 link: http://mathmu.github.io
 copyright: '&copy;&nbsp;<a href="http://szhang.net">Jason Siang ZHANG</a>'
 
-highlighter: pygments
+highlighter: rouge
 permalink: pretty
 #markdown: maruku
 markdown: kramdown

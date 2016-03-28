@@ -2,7 +2,7 @@
 layout: szhang_group
 title: maTHmU Scientific Computation Engine Group
 category: groups
-permalink: /groups/mathmu-scientific-computation-engine
+permalink: /groups/mathmu-scientific-computation-engine/
 link: http://github.com/mulab
 cover: /groups/mathmu-scientific-computation-engine/mathmu_business_group.jpg
 ---

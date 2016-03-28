@@ -2,7 +2,7 @@
 layout: szhang_project
 title: maTHμ Project
 category: projects
-permalink: /projects/mathmu
+permalink: /projects/mathmu/
 cover: /projects/mathmu/mathmu.png
 ---
 
