@@ -1,7 +1,7 @@
 /* The console container element */
 #console {
   position: absolute;
-  width: 90%;
+  width: 100%;
   height: 300px;
 }
 #console pre {

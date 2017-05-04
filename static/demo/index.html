@@ -47,17 +47,17 @@ LinearSolve[{{1,1},{1,1}},{1,1}]</textarea>
                   <button id="run" class="btn btn-default">Run</button>
                   <button id="clear" class="btn btn-default">Clear</button>
                   <label id="run_info"></label>
-              </div>
-              <div class="float_right">
-                <div id="kernels" class="btn-group" data-toggle="buttons">
-                  <label class="btn btn-default active">
-                  <input name="op" type="radio" value="mU" />mU</label>
-                  <label class="btn btn-default">
-                  <input name="op" type="radio" value="nV" />nV</label>
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" id="wrap_console" />Line Wrap</label>
-                </div>
+                  <div class="float_right">
+                    <div id="kernels" class="btn-group" data-toggle="buttons">
+                      <label class="btn btn-default active">
+                      <input name="op" type="radio" value="mU" />mU</label>
+                      <label class="btn btn-default">
+                      <input name="op" type="radio" value="nV" />nV</label>
+                    </div>
+                    <div class="checkbox-inline">
+                      <label><input type="checkbox" id="wrap_console" />Line Wrap</label>
+                    </div>
+                  </div>
               </div>
           </form>
       </div>
@@ -140,7 +140,7 @@ LinearSolve[{{1,1},{1,1}},{1,1}]</textarea>
             // Initiate the first prompt
             handler();
             
-            Module.nV = Module._nV_init();
+            /*Module.nV = Module._nV_init();
             Module.nV_eval_wrapper = Module.cwrap('nV_eval', 'string', ['number', 'string']);
             Module.nV_eval = function(x) { return Module.nV_eval_wrapper(Module.nV, x); }
             
@@ -148,7 +148,7 @@ LinearSolve[{{1,1},{1,1}},{1,1}]</textarea>
             Module.mU_eval = Module.cwrap('mU_eval', 'string', ['string']);
 
             Module.eval = Module.mU_eval;
-            Module.eval('Integrate[x*Sin[x],x]');
+            Module.eval('Integrate[x*Sin[x],x]');*/
           }
         };
         $("#actions").submit(function() {
