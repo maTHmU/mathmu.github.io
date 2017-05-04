@@ -1,6 +1,8 @@
 
 ### [Project](/projects/mathmu)
 
+### [Demo](/demo)
+
 ### [Links](/links)
 
 ### [Blog](/blog)

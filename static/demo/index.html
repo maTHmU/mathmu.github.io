@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>mU/nV.js</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+    <link href='https://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css' rel='stylesheet' type='text/css'>
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+    <link href="css/ansi.css" rel='stylesheet' type="text/css"/>
+    <link href="css/console.css" rel='stylesheet' type="text/css"/>
+    <link href='css/codemirror/codemirror.css' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+      .CodeMirror {
+        border-top: 1px solid black; border-bottom: 1px solid black;
+      }
+      .float_right {
+          float:right;
+      }
+      .CodeMirror, #console {
+          transition: height 1s ease;
+          transition-delay: 0.2s; /* fix for hit the run button */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class='container'>
+      <div class="row">
+          <textarea id="editor">Print@"Hello mU/nV.js!";
+FactorInteger[100!]
+Factor[x^2-1]
+D[x^2*Sin[x],x]
+Integrate[x*Sin[x],x]
+LinearSolve[{{1,1},{1,1}},{1,1}]</textarea>
+      </div>
+      <div class="row">
+          <form id="actions" class="form-inline" action="">
+              <div class="form-group">
+                  <button id="run" class="btn btn-default">Run</button>
+                  <button id="clear" class="btn btn-default">Clear</button>
+                  <label id="run_info"></label>
+              </div>
+              <div class="float_right">
+                <div id="kernels" class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-default active">
+                  <input name="op" type="radio" value="mU" />mU</label>
+                  <label class="btn btn-default">
+                  <input name="op" type="radio" value="nV" />nV</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" id="wrap_console" />Line Wrap</label>
+                </div>
+              </div>
+          </form>
+      </div>
+      <noscript><h3>Please enable JavaScript for using mU/nV.js</h3></noscript>
+      <div id="console" class="row"></div>
+    </div>
+    <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      function human_time(milliseconds) {
+        var temp = Math.floor(milliseconds / 1000);
+        var minutes = Math.floor((temp %= 3600) / 60);
+        if (minutes) {
+            return milliseconds / 1000 / 60 + ' min'
+        }
+        var seconds = temp % 60;
+        if (seconds) {
+            return milliseconds / 1000 + ' sec'
+        }
+        return milliseconds + ' ms'
+      }
+      $(function() {
+        // Creating the console.
+        var header = 'Welcome to mU/nV.js!\n';
+        window.jqconsole = $('#console').jqconsole('', 'mU> ');
+
+        // Abort prompt on Ctrl+Z.
+        jqconsole.RegisterShortcut('Z', function() {
+          jqconsole.AbortPrompt();
+          handler();
+        });
+        // Move to line start Ctrl+A.
+        jqconsole.RegisterShortcut('A', function() {
+          jqconsole.MoveToStart();
+          handler();
+        });
+        // Move to line end Ctrl+E.
+        jqconsole.RegisterShortcut('E', function() {
+          jqconsole.MoveToEnd();
+          handler();
+        });
+        jqconsole.RegisterMatching('{', '}', 'brace');
+        jqconsole.RegisterMatching('(', ')', 'paran');
+        jqconsole.RegisterMatching('[', ']', 'bracket');
+        // Handle a command.
+        var handler = function(command) {
+          if (command) {
+            var r = Module.eval(command);
+            if (r != 'Null\n') jqconsole.Write(r, 'jqconsole-output');
+          }
+          jqconsole.Prompt(true, handler);
+        };
+
+        jqconsole.Write(header, 'jqconsole-output');
+        jqconsole.Write('\nLoading mU/nV.js.', 'jqconsole-prompt');
+        var pseudo_status = setInterval(function(){ jqconsole.Write(".", 'jqconsole-prompt'); }, 500);
+
+        window.Module = {
+          print : function(text) { jqconsole.Write(text + '\n', 'stdout'); },
+          printErr : function(text) { jqconsole.Write(text + '\n', 'stderr'); }
+        };
+        var script = document.createElement('script');
+        script.src = "nv.js";
+        document.body.appendChild(script);
+
+        $("#run_info").text("Waiting ...");
+        var init_start = new Date();
+        script.onload = function () {
+          Module.onRuntimeInitialized = function() {
+            var duration = new Date() - init_start;
+            $("#run_info").text("Loaded in " + human_time(duration));
+
+            clearInterval(pseudo_status);
+            jqconsole.Reset();
+            jqconsole.Write(header, 'jqconsole-output');
+
+            $(".CodeMirror").slideDown();
+            CodeMirrorEditor.refresh();
+
+            // Initiate the first prompt
+            handler();
+            
+            Module.nV = Module._nV_init();
+            Module.nV_eval_wrapper = Module.cwrap('nV_eval', 'string', ['number', 'string']);
+            Module.nV_eval = function(x) { return Module.nV_eval_wrapper(Module.nV, x); }
+            
+            Module._mU_init();
+            Module.mU_eval = Module.cwrap('mU_eval', 'string', ['string']);
+
+            Module.eval = Module.mU_eval;
+            Module.eval('Integrate[x*Sin[x],x]');
+          }
+        };
+        $("#actions").submit(function() {
+            // never "submit" the actions-form
+            return false;
+        })
+        CodeMirrorEditor = CodeMirror.fromTextArea($("#editor")[0], {
+            mode: {
+                name: "text/x-mathematica",
+                version: 2,
+                singleLineStringErrors: false
+            },
+            lineNumbers: true,
+            indentUnit: 4,
+            matchBrackets: true
+        });
+        $("#wrap_console").prop( "checked", false );
+        $("#wrap_console").change(function() {
+            if($(this).is(":checked")) {
+                $(".jqconsole").css("word-wrap", "break-word");
+                $(".jqconsole").css("white-space", "pre-wrap");
+            } else {
+                $(".jqconsole").css("word-wrap", "");
+                $(".jqconsole").css("white-space", "");
+            }
+        });
+        $("#run").click(function() {
+            var code=CodeMirrorEditor.getValue();
+            var start_time = new Date();
+            jqconsole.Write(Module.eval(code), 'jqconsole-output');
+            var duration = new Date() - start_time;
+            $("#run_info").text("Run in " + human_time(duration));
+        });
+        $("#clear").click(function() {
+            jqconsole.Reset();
+            jqconsole.Write(header, 'jqconsole-output');
+            handler();
+        });
+        $('#kernels :input').change(function() {
+            var kernel = this.value;
+            Module.eval = Module[kernel + '_eval'];
+            jqconsole.SetPromptLabel(kernel + '> ');
+            jqconsole.AbortPrompt();
+            handler();
+        });
+      });
+    </script>
+  <script src="js/jqconsole.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/codemirror/codemirror.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/codemirror/mathematica.js"></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js'></script>
+  </body>
+</html>
