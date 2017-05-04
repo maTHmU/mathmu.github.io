@@ -140,7 +140,7 @@ LinearSolve[{{1,1},{1,1}},{1,1}]</textarea>
             // Initiate the first prompt
             handler();
             
-            /*Module.nV = Module._nV_init();
+            Module.nV = Module._nV_init();
             Module.nV_eval_wrapper = Module.cwrap('nV_eval', 'string', ['number', 'string']);
             Module.nV_eval = function(x) { return Module.nV_eval_wrapper(Module.nV, x); }
             
@@ -148,7 +148,7 @@ LinearSolve[{{1,1},{1,1}},{1,1}]</textarea>
             Module.mU_eval = Module.cwrap('mU_eval', 'string', ['string']);
 
             Module.eval = Module.mU_eval;
-            Module.eval('Integrate[x*Sin[x],x]');*/
+            Module.eval('Integrate[x*Sin[x],x]');
           }
         };
         $("#actions").submit(function() {
